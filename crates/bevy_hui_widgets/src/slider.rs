@@ -118,7 +118,7 @@ fn init_slider(
         .map(|children| {
             children
                 .iter()
-                .find_map(|child| buttons.get(*child).ok().map(|_| *child))
+                .find_map(|child| buttons.get(child.entity()).ok().map(|_| child.entity()))
         })
         .flatten()
     else {
@@ -183,7 +183,7 @@ fn update_drag(
 
                         let slider_value = next_pos / max_pos;
                         style.computed.node.left = Val::Px(next_pos);
-                        slider_events.send(SliderChangedEvent {
+                        slider_events.write(SliderChangedEvent {
                             slider: nob.slider,
                             value: slider_value,
                         });
@@ -205,7 +205,7 @@ fn update_drag(
 
                         let slider_value = next_pos / max_pos;
                         style.computed.node.bottom = Val::Px(next_pos);
-                        slider_events.send(SliderChangedEvent {
+                        slider_events.write(SliderChangedEvent {
                             slider: nob.slider,
                             value: slider_value,
                         });

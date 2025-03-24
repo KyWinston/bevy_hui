@@ -3,17 +3,19 @@ use crate::data::{Action, AttrTokens, Attribute, HtmlTemplate, StyleAttr, XNode}
 use crate::prelude::NodeType;
 use crate::util::SlotMap;
 use bevy::math::{Rect, UVec2, Vec2};
+use bevy::platform_support::collections::HashMap;
 use bevy::prelude::EaseFunction;
 use bevy::sprite::{BorderRect, SliceScaleMode, TextureSlicer};
 use bevy::ui::widget::NodeImageMode;
 use bevy::ui::{
     AlignContent, AlignItems, AlignSelf, Display, FlexDirection, FlexWrap, GlobalZIndex, GridAutoFlow, GridPlacement, GridTrack, JustifyContent, JustifyItems, JustifySelf, Outline, Overflow, OverflowAxis, OverflowClipBox, OverflowClipMargin, PositionType, RepeatedGridTrack, ZIndex
 };
-use bevy::utils::HashMap;
+
 use bevy::{
     color::Color,
     ui::{UiRect, Val},
 };
+
 use nom::{
     branch::alt,
     bytes::complete::{is_not, tag, take_until, take_while, take_while1, take_while_m_n},
@@ -951,7 +953,7 @@ where
     Ok((
         input,
         NodeImageMode::Sliced(TextureSlicer {
-            border: BorderRect::square(val),
+            border: BorderRect::all(val),
             center_scale_mode: x,
             sides_scale_mode: y,
             max_corner_scale: s,
